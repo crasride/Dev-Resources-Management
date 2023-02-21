@@ -16,12 +16,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from library import views
+from django.conf import settings
+from django.contrib.staticfiles.urls import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
     path('signup/', views.signup, name='signup'),
-    path('listbooks/', views.listbooks, name='listbooks'),
+    path('books/', views.books, name='books'),
+    path('create_books/', views.create_books, name='create_books'),
+    path('delete_books/<int:id>/', views.delete_books, name='delete_books'),
+    path('search_books/<int:id>/', views.search_books, name='search_books'),
+    path('search_books/', views.search_books, name='search_books'),
+    path('book_detail/<int:book_id>/', views.book_detail, name='book_detail'),
+    path('search_books_online/', views.search_books_online, name='search_books_online'),
+    path('author/', views.author, name='author'),
+    path('create_author/', views.create_author, name='create_author'),
+    path('create_techno/', views.create_techno, name='create_techno'),
     path('logout/', views.signout, name='logout'),
     path('signin/', views.signin, name='signin'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+ + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+  
