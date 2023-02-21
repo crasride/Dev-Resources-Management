@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="card card-body w-50 mx-auto" >
+        <h2 class="mb-4 text-center">Techno Creation Form</h2>
+        {% if error %}
+		<div class="alert alert-primary text-center" role="alert">
+        	{{ error }}
+		</div>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data" class="text-center">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.techno.id_for_label }}">Name:</label>
+                {{ form.name }}
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary text">Add Techno</button>
+            |
+            <button type="submit" name="submit" class="btn btn-primary text">Return</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

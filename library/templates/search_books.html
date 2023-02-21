@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h1 class="mt-4 mb-4 text-center">Search Books</h1>
+      <form method="get" action="{% url 'search_books' %}" class="mb-4">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search for books" value="{{ query }}">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+      {% if books %}
+        <p class="mt-4">Have been found {{ books.count }} Books:</p>
+        <ul class="list-group">
+          {% for book in books %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a> 
+              <span class="badge badge-primary badge-pill">{{ book.year }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="mt-4">No books found</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -3,19 +3,48 @@
 
 {% block content %}
 
-<h1>Home</h1>
+<style>
+	.title {
+    margin-bottom: 70px;
+}
+</style>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-Quam, quod asperiores! Dolorum nihil, incidunt harum debitis deserunt
-quaerat modi adipisci a officiis quod in enim dicta soluta possimus
-reprehenderit facere, culpa voluptates expedita ut esse! Quibusdam minus
-voluptate, molestiae consequuntur modi optio enim dolorum iste placeat
-repudiandae ullam, sed sint dolores quas non blanditiis iusto odit sit
-velit, soluta earum corrupti! Laudantium aliquam molestiae qui quae quia,
-atque fugit vero ab quam, iure veniam, quibusdam a debitis distinctio
-molestias perspiciatis. Delectus earum, similique recusandae, laudantium
-eveniet cupiditate odit dicta fuga qui soluta quaerat cum. Voluptas dicta
-cupiditate mollitia. Eum, similique.</p>
+
+<div class="container" py-5>
+	<section class="card card-body mt-5">
+		<h1 class="text-center">Help documentation for you projects</h1>
+		<h3 class="text-center title">Seek and find, it' all here</h3>
+
+		<div class="text-center">
+			<a class="btn btn-primary" href="/signin">
+				Signin
+			</a>
+			<a class="btn btn-primary" href="/signup">
+				Signup
+			</a>
+		</div>
+	</section>
+
+<div class="row mt-5">
+	<div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-body text-center">
+                <img src="/static/book.png" class="img-fluid" height="100" width="100">
+                <h4 class="text-center"><strong>The Knowledge Babe</strong></h4>
+      			<p>Here you will find all kinds of technology and computer books and manuals.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+            <div class="card-body text-center">
+				<img src="/static/cheat.png" class="img-fluid" height="100" width="100"></a>
+				<h4 class="text-center"><strong> Cheats Sheets</strong></h4>
+				<p>It is a more general use, in that makes a brief reference to the most used terms, commands or symbols</p>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
-

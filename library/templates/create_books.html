@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+	.btn-plus {
+  color: green;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+}
+</style>
+
+<div class="container mt-0">
+  <div class="row justify-content-left">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">Create Book</div>
+        <div class="card-body">
+          <form action="/create_books/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group d-flex justify-content-between">
+              <div>
+                <label for="{{ form.title.id_for_label }}">Title</label>
+                {{ form.title }}
+              </div>
+              <button type="submit" class="btn btn-primary px-5">Save</button>
+            </div>
+            <div class="form-group">
+				      <label for="{{ form.author.id_for_label }}">Author</label>
+				      {{ form.author }}
+				      <a href="{% url 'create_author' %}" class="btn btn-secondary ml-2 btn-plus"><strong>+</strong></a>
+			      </div>
+            <div class="form-group">
+              <label for="{{ form.techno.id_for_label }}">Techno</label>
+              {{ form.techno }}
+              <a href="{% url 'create_techno' %}" class="btn btn-secondary ml-2 btn-plus"><strong>+</strong></a>
+            </div>
+            <div class="form-group">
+              <label for="{{ form.year.id_for_label }}">Year</label>
+              {{ form.year }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.language.id_for_label }}">Language</label>
+              {{ form.language }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.image.id_for_label }}">Image</label>
+              {{ form.image }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.pdf_link.id_for_label }}">PDF</label>
+              {{ form.pdf_link }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.description.id_for_label }}">Description</label>
+              {{ form.description }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

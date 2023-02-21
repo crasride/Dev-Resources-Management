@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+  .thumbnail img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .alert-success {
+    background-color: #cce5ff;
+    color: #004085;
+    border-color: #b8daff;
+  }
+
+  .confirm-delete-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .confirm-delete-modal .modal-content {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .confirm-delete-modal .modal-content h2 {
+    margin-top: 0;
+
+  }
+
+  .confirm-delete-modal .modal-content p {
+    margin-bottom: 20px;
+  }
+
+  .confirm-delete-modal .modal-content button {
+    margin-right: 10px;
+  }
+
+</style>
+
+<main class="container my-5">
+  <h1 class="text-center">List Books</h1>
+  {% if messages %}
+  <div class="alert alert-dismissible fade show" role="alert">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Year</th>
+          <th>Author</th>
+          <th>Techno</th>
+          <th>Description</th>
+          <th>Image</th>
+          <th>PDF Link</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in list %}
+        <tr>
+          <td>{{ book.title }}</td>
+          <td>{{ book.year }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.techno }}</td>
+          <td>{{ book.description }}</td>
+          <td class="thumbnail">{% if book.image %}
+            <img src="{{ book.image.url }}" class="img-thumbnail" data-toggle="modal"
+              data-target="#bookImageModal{{ book.id }}">
+            <div class="modal fade" id="bookImageModal{{ book.id }}" tabindex="-1" role="dialog"
+              aria-labelledby="bookImageModal{{ book.id }}Label" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <img src="{{ book.image.url }}" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </td>
+          <td>
+            {% if book.pdf_link %}
+            <a href="{{ PDF_URL }}{{ book.pdf_link.url }}" class="btn btn-primary" target="_blank">
+              View PDF
+            </a>
+            {% endif %}
+          </td>
+          <td>
+            {% if book.user == request.user %}
+            <form action="{% url 'delete_books' id=book.id %}" method="POST">
+              {% csrf_token %}
+              <button type="button" class="btn btn-danger"onclick="showConfirmDeleteModal({{ book.id }})">Delete</button>
+            </form>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</main>
+<script>
+  function showConfirmDeleteModal(bookId) {
+    const modal = document.createElement('div');
+    modal.classList.add('confirm-delete-modal');
+    modal.innerHTML = `
+            <div class="modal-content">
+              <h2>Confirm Delete</h2>
+              <p>Are you sure you want to delete this book?</p>
+              <button class="btn btn-danger" onclick="deleteBook(${bookId})">Delete</button>
+              <button class="btn btn-primary btn-sm" onclick="closeModal()">Cancel</button>
+            </div>
+          `;
+    document.body.appendChild(modal);
+  }
+
+  function closeModal() {
+    const modal = document.querySelector('.confirm-delete-modal');
+    document.body.removeChild(modal);
+  }
+
+  function deleteBook(bookId) {
+    // Send the deletion request to the server
+    const form = document.querySelector(`form[action='/delete_books/${bookId}/']`);
+    form.submit();
+  }
+</script>
+
+{% endblock %}

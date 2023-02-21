@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <div class="container my-5">
+        <h1 class="text-center">Search Books Online</h1>
+
+        <form method="get" class="d-flex justify-content-center mt-5">
+            <div class="input-group">
+                <input type="text" id="q" name="q" class="form-control" placeholder="Search Books" value="{{ query }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+
+        {% if error %}
+            <div class="alert alert-danger mt-5" role="alert">
+                {{ error }}
+            </div>
+        {% else %}
+            {% if books %}
+                <div class="mt-5">
+                    <p>Found {{ books|length }} books of your query "{{ query }}":</p>
+                    <ul>
+                        {% for book in books %}
+                            <li>
+                                {% if book.title %}
+								<a href="http://openlibrary.org{{ book.key }}" target="_blank">{{ book.title }}</a>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <div class="alert alert-primary text-center mt-5" role="alert">
+					Please enter a search.
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
