@@ -1,24 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- The content block is defined for overriding by child templates -->
 
 <div class="container">
-    <div class="card card-body w-50 mx-auto" >
+    <div class="card card-body w-50 mx-auto">
+        <!-- A container is created with a card that holds the form -->
         <h2 class="mb-4 text-center">Techno Creation Form</h2>
+        <!-- A heading for the form is created -->
         {% if error %}
-		<div class="alert alert-primary text-center" role="alert">
-        	{{ error }}
-		</div>
+        <!-- If the error variable is defined, an alert message is displayed -->
+        <div class="alert alert-primary text-center" role="alert">
+            {{ error }}
+        </div>
         {% endif %}
         <form method="POST" enctype="multipart/form-data" class="text-center">
+            <!-- A form is created with POST request method and enctype for file uploads -->
             {% csrf_token %}
+            <!-- A CSRF token is included for security purposes -->
             <div class="form-group">
                 <label for="{{ form.techno.id_for_label }}">Name:</label>
+                <!-- A label for the form input is created -->
                 {{ form.name }}
+                <!-- The form input for the name field is displayed -->
             </div>
             <button type="submit" name="submit" class="btn btn-primary text">Add Techno</button>
-            |
-            <button type="submit" name="submit" class="btn btn-primary text">Return</button>
+            <!-- A button is created for submitting the form -->
         </form>
     </div>
 </div>
