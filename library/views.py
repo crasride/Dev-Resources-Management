@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import requests
 
+
 # Create your views here.
 
 
@@ -46,24 +47,30 @@ def books(request):
     # list = Book.objects.filter(user=request.user)
     return render(request, 'books.html', {"list": list})
 
+
 @login_required # Route Protection
 def create_books(request):
+    # If request method is GET, display create_books.html page with the BooksForm
     if request.method == 'GET':
         return render(request, 'create_books.html', {'form': BooksForm})
     else:
         try:
-            # form = BooksForm(request.POST]
+            # If request method is POST, validate the BooksForm data
             form = BooksForm(request.POST or None, request.FILES or None)
             new_book = form.save(commit=False)
+            # Assign the current user to the new_book object
             new_book.user = request.user
-            # print(new_book)
+            # Save the new book object to the database
             new_book.save()
+            # Redirect to the books page
             return redirect('books')
         except ValueError:
+            # If there is a value error, display the create_books.html page with the BooksForm and an error message
             return render(request, 'create_books.html', {
                 'form': BooksForm,
-                'error': 'Please provaide valia data'
+                'error': 'Please provide valid data'
             })
+
 
 @login_required # Route Protection
 def delete_books(request, id):
