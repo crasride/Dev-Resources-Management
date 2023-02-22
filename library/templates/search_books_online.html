@@ -25,7 +25,7 @@
                         {% for book in books %}
                             <li>
                                 {% if book.title %}
-								<a href="http://openlibrary.org{{ book.key }}" target="_blank">{{ book.title }}</a>
+								<a href="http://openlibrary.org{{ book.key }}" target="_blank">{{ book.title }} {{ book.subtitle }} | Author: {{ book.author_name }}</a>
                                 {% else %}
                                     -
                                 {% endif %}
