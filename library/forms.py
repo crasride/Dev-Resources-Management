@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Book, Author, Techno
+from .models import Book, Author, Techno, CheatSheet
 
 # Define a form for the Book model
 class BooksForm(ModelForm):
@@ -27,3 +27,9 @@ class TechnoForm(ModelForm):
         model = Techno
         # Specify the fields that will be available in the form
         fields = ['name']
+
+class CheatsheetForm(ModelForm):
+    class Meta:
+        model = CheatSheet
+        # Specify the fields that will be available in the form
+        fields = ['title', 'techno', 'link_imagen', 'pdf_link', 'description']
