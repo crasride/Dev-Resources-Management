@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'library'
+    'library',
+    'django_select2',
     
 ]
 
@@ -127,10 +128,24 @@ LOGIN_URL = '/signin'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-MEDIA_ROOT = os.path.join(BASE_DIR, '')
-PDF_ROOT = os.path.join(BASE_DIR, '')
-MEDIA_URL = '/imagenes/'
-PDF_URL = '/pdfs/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+PDF_ROOT = os.path.join(MEDIA_ROOT, 'books', 'pdf')
+PDF_URL = '/media/books/pdf/'
+
+IMAGES_ROOT = os.path.join(MEDIA_ROOT, 'books', 'images')
+IMAGES_URL = '/media/books/images/'
+
+CHEATS_ROOT = os.path.join(MEDIA_ROOT, 'media')
+CHEATS_URL = '/media/cheat_sheets/'
+
+PDF_ROOT = os.path.join(MEDIA_ROOT, 'cheat_sheets', 'pdf')
+PDF_URL = '/media/cheat_sheets/pdf/'
+
+IMAGES_ROOT = os.path.join(MEDIA_ROOT, 'cheat_sheets', 'images')
+IMAGES_URL = '/media/cheat_sheets/images/'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
