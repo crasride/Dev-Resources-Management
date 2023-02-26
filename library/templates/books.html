@@ -1,54 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<style>
-  .thumbnail img {
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
-    cursor: pointer;
-  }
-
-  .alert-success {
-    background-color: #cce5ff;
-    color: #004085;
-    border-color: #b8daff;
-  }
-
-  .confirm-delete-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .confirm-delete-modal .modal-content {
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 20px;
-    max-width: 500px;
-    text-align: center;
-  }
-
-  .confirm-delete-modal .modal-content h2 {
-    margin-top: 0;
-
-  }
-
-  .confirm-delete-modal .modal-content p {
-    margin-bottom: 20px;
-  }
-
-  .confirm-delete-modal .modal-content button {
-    margin-right: 10px;
-  }
-
-</style>
 
 <main class="container my-5">
   <h1 class="text-center">List Books</h1>
@@ -109,18 +61,77 @@
           <td>
             {% if book.user == request.user %}
             <form action="{% url 'delete_books' id=book.id %}" method="POST">
+              <!-- CSRF token to protect against cross-site request forgery attacks -->
               {% csrf_token %}
               <button type="button" class="btn btn-danger"onclick="showConfirmDeleteModal({{ book.id }})">Delete</button>
             </form>
             {% endif %}
           </td>
+          <td>
+            <form action="{% url 'favorites' book_id=book.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Favorites</button>
+            </form>
+         </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
 </main>
+
+<style>
+  /* Style definition different parts of the code */
+  .thumbnail img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  .alert-success {
+    background-color: #cce5ff;
+    color: #004085;
+    border-color: #b8daff;
+  }
+
+  .confirm-delete-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .confirm-delete-modal .modal-content {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 500px;
+    text-align: center;
+  }
+
+  .confirm-delete-modal .modal-content h2 {
+    margin-top: 0;
+
+  }
+
+  .confirm-delete-modal .modal-content p {
+    margin-bottom: 20px;
+  }
+
+  .confirm-delete-modal .modal-content button {
+    margin-right: 10px;
+  }
+
+</style>
+
 <script>
+  /* create a confirmation window to delete a cheat sheet */
   function showConfirmDeleteModal(bookId) {
     const modal = document.createElement('div');
     modal.classList.add('confirm-delete-modal');
@@ -141,7 +152,7 @@
   }
 
   function deleteBook(bookId) {
-    // Send the deletion request to the server
+     /* Send the deletion request */
     const form = document.querySelector(`form[action='/delete_books/${bookId}/']`);
     form.submit();
   }

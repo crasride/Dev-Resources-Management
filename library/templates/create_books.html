@@ -3,12 +3,41 @@
 {% block content %}
 
 <style>
+  /* Style definition different parts of the code */
 	.btn-plus {
   color: green;
   background-color: transparent;
   border: none;
   font-size: 1.5rem;
 }
+
+textarea#id_description {
+    width: 100%;
+    max-width: 100%;
+  }
+
+ /* Reducir el ancho del campo de selección de tecnología */
+ select#id_techno {
+    width: 60%;
+    height: 50%;
+  }
+
+  textarea#id_description {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  select#id_author {
+    width: 60%;
+    height: 50%;
+  }
+
+  body {
+      background-image: url("/static/white-male-g9d017c5ed_1280.jpg");
+      background-size: contain;
+      background-position: right;
+      background-repeat: no-repeat;
+  }
 </style>
 
 <div class="container mt-0">
@@ -17,7 +46,9 @@
       <div class="card">
         <div class="card-header">Create Book</div>
         <div class="card-body">
+          <!-- The form that uses the URL '/create_books/' and HTTP POST method -->
           <form action="/create_books/" method="POST" enctype="multipart/form-data">
+            <!-- CSRF token to protect against cross-site request forgery attacks -->
             {% csrf_token %}
             <div class="form-group d-flex justify-content-between">
               <div>
@@ -27,14 +58,21 @@
               <button type="submit" class="btn btn-primary px-5">Save</button>
             </div>
             <div class="form-group">
-				      <label for="{{ form.author.id_for_label }}">Author</label>
-				      {{ form.author }}
-				      <a href="{% url 'create_author' %}" class="btn btn-secondary ml-2 btn-plus"><strong>+</strong></a>
-			      </div>
+              <label for="{{ form.author.id_for_label }} ">Author</label>
+              <div class="input-group">
+                {{ form.author}}
+                <div class="input-group-append">
+                  <button id="btn-add-author" class="btn btn-secondary ml-2 btn-plus"><strong>+</strong></button>
+                </div>
+              </div>
             <div class="form-group">
-              <label for="{{ form.techno.id_for_label }}">Techno</label>
-              {{ form.techno }}
-              <a href="{% url 'create_techno' %}" class="btn btn-secondary ml-2 btn-plus"><strong>+</strong></a>
+              <label for="{{ form.techno.id_for_label }} ">Techno</label>
+              <div class="input-group">
+                {{ form.techno}}
+                <div class="input-group-append">
+                  <button id="btn-add-techno" class="btn btn-secondary ml-2 btn-plus"><strong>+</strong></button>
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <label for="{{ form.year.id_for_label }}">Year</label>
@@ -62,5 +100,22 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Obtener una referencia al botón +
+  const btnAddTechno = document.querySelector('#btn-add-techno');
+  const btnAddAuthor = document.querySelector('#btn-add-author');
+
+  // Agregar un evento de clic al botón
+  btnAddTechno.addEventListener('click', function() {
+    // Abrir la ventana emergente con tu plantilla HTML
+    window.open('/techno_form/', 'Dev Resources Management', 'width=800,height=500,top='+(screen.height/2-200)+',left='+(screen.width/2-200)+',toolbar=no');
+});
+
+btnAddAuthor.addEventListener('click', function() {
+    // Abrir la ventana emergente con tu plantilla HTML
+    window.open('/author_form/', 'Dev Resources Management', 'width=800,height=500,top='+(screen.height/2-200)+',left='+(screen.width/2-200)+',toolbar=no');
+});
+</script>
 
 {% endblock %}

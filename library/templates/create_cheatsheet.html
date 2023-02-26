@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  .btn-plus {
+    color: green;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+  }
+
+  .btn-new-techno {
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+  }
+
+   /* Reducir el ancho del campo de selección de tecnología */
+   select#id_techno {
+    width: 60%;
+    height: 50%;
+  }
+
+  textarea#id_description {
+    width: 100%;
+    max-width: 100%;
+  }
+
+</style>
+
+<div class="container mt-5">
+  <div class="row justify-content-left">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">Create Cheat Sheet</div>
+        <div class="card-body">
+          <form action="/create_cheatsheet/" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group d-flex justify-content-between">
+              <div>
+                <label for="{{ form.title.id_for_label }}">Title</label>
+                {{ form.title }}
+              </div>
+              <button type="submit" class="btn btn-primary px-5">Save</button>
+            </div>
+            <div class="form-group">
+              <label for="{{ form.techno.id_for_label }} ">Techno</label>
+              <div class="input-group">
+                {{ form.techno}}
+                <div class="input-group-append">
+                  <button id="btn-add-techno" class="btn btn-secondary ml-2 btn-plus"><strong>+</strong></button>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="{{ form.link_imagen.id_for_label }}">Image Link</label>
+              {{ form.link_imagen }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.pdf_link.id_for_label }}">PDF</label>
+              {{ form.pdf_link }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.description.id_for_label }}">Description</label>
+              {{ form.description }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Obtener una referencia al botón +
+  const btnAddTechno = document.querySelector('#btn-add-techno');
+
+  // Agregar un evento de clic al botón
+  btnAddTechno.addEventListener('click', function() {
+    // Abrir la ventana emergente con tu plantilla HTML
+    window.open('/techno_form/', 'Dev Resources Management', 'width=800,height=500,top='+(screen.height/2-200)+',left='+(screen.width/2-200)+',toolbar=no');
+});
+</script>
+
+{% endblock %}

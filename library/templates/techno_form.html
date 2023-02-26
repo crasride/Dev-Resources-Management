@@ -1,0 +1,47 @@
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS Styles-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Link to our custom CSS file -->
+     <!-- <link rel="stylesheet" href="./styles/navbar.css"> -->
+    <title>Dev Resources Management</title>
+</head>
+
+{% if success %}
+  <script>
+    window.opener.location.reload();
+    window.close();
+  </script>
+{% endif %}
+
+{% block content %}
+  <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card card-body w-50">
+      <h2 class="mb-4 text-center">Techno Creation Form</h2>
+      {% if error %}
+        <div class="alert alert-primary text-center" role="alert">
+          {{ error }}
+        </div>
+      {% endif %}
+      <form method="POST" enctype="multipart/form-data" class="text-center">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="{{ form.techno.id_for_label }}">Name:</label>
+          {{ form.name }}
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary text">Add Techno</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+<!-- Link Bootstrap scripts-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUib

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <h1 style="text-align: center; font-size: 2em;"><img src="{% static 'favorites.png' %}" alt="Favorite icon" height="70">  Favorites</h1>
+  <div style="text-align: left; margin-top: 40px;">
+    {% if favorites %}
+      <div style="max-width: 350px; margin: 10 auto;">
+        <ul style="margin: 0; padding: 0;">
+          {% for favorite in favorites %}
+            <li style="margin-bottom: 10px; padding: 10px; background-color: #f2f2f2; border-radius: 5px;">
+              {% if favorite.books.first.image %}
+                <img src="{{ favorite.books.first.image.url }}" alt="{{ favorite.books.first.title }}" style="max-height: 50px; max-width: 50px; margin-right: 10px;">
+              {% endif %}
+              <a href="{% url 'book_detail_favorites' favorite.books.first.pk %}" style="text-decoration: none; color: #1c08f0;">{{ favorite.books.first.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% else %}
+      <p>You haven't added any favorites yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}

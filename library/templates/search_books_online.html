@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="row">
@@ -42,5 +43,17 @@
     </div>
   </div>
 </div>
+
+<style>
+
+    body {
+        background-image: url("/static/looking-for-1013910_1280.jpg");
+        background-size: contain;
+        background-position: right;
+        background-repeat: no-repeat;
+        background-position-y: 250px;
+    }
+
+</style>
 
 {% endblock %}
