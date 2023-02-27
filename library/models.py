@@ -12,6 +12,10 @@ class Techno(models.Model):
     def __str__(self):
         return self.name
 
+# sort data method
+    class Meta:
+        ordering = ['name']
+
 class Language(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
@@ -25,7 +29,11 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
-    
+
+    # sort data method
+    class Meta:
+        ordering = ['name']
+
 class CheatSheet(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200, verbose_name='Title')
@@ -73,6 +81,10 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title + '- by ' + self.user.username
+    
+    # sort data method
+    class Meta:
+        ordering = ['techno']
 
     # Allows local deletion of files
     def delete(self, using=None, keep_parents=False):
