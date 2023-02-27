@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 
@@ -59,7 +60,9 @@ class Book(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200, verbose_name='Title')
     author = models.ForeignKey(Author, on_delete=models.RESTRICT, verbose_name='Author')
-    year = models.IntegerField(verbose_name='Year')
+    # The options argument that sets the list of options to be displayed (tuples).
+    year_choices = [(r,r) for r in range(1970, datetime.date.today().year+1)]
+    year = models.IntegerField(verbose_name='Year', choices=year_choices)
     techno = models.ForeignKey(Techno, on_delete=models.RESTRICT, verbose_name='Techno')
     language = models.ForeignKey(Language, on_delete=models.RESTRICT, verbose_name='Language')
     image = models.ImageField(upload_to='media/books/images/', verbose_name='Image', null=True, blank=True)
