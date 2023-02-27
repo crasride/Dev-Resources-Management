@@ -20,6 +20,12 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def cookies_policy(request):
+    return render(request, 'cookies_policy.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
 # Definition of functions for interaction with the openlibrary-client (section)
 
 @login_required

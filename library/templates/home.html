@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
 <style>
 	.title {
-    margin-bottom: 70px;
-}
+    	margin-bottom: 70px;
+	}
 </style>
 
-
-<div class="container" py-5>
+<div class="container">
 	<section class="card card-body mt-5">
 		<h1 class="text-center font-weight-bold">Help documentation for you projects</h1>
 		<h3 class="text-center title font-weight-bold">Seek and find, it's all here</h3>
@@ -24,26 +22,52 @@
 		</div>
 	</section>
 
-<div class="row mt-5">
-	<div class="col-md-4 mx-auto">
-        <div class="card">
-            <div class="card-body text-center">
-                <img src="/static/book.png" class="img-fluid" height="100" width="100">
-                <h4 class="text-center"><strong>The Knowledge Base</strong></h4>
-      			<p>Here you will find all kinds of technology and computer books and manuals.</p>
-            </div>
-        </div>
-    </div>
+	<div class="row mt-5">
+		<div class="col-md-4 mx-auto">
+	        <div class="card">
+	            <div class="card-body text-center">
+	                <img src="/static/book.png" class="img-fluid" height="100" width="100">
+	                <h4 class="text-center"><strong>The Knowledge Base</strong></h4>
+	      			<p>Here you will find all kinds of technology and computer books and manuals.</p>
+	            </div>
+	        </div>
+	    </div>
 
-    <div class="col-md-4 mx-auto">
-        <div class="card">
-            <div class="card-body text-center">
-				<img src="/static/cheat.png" class="img-fluid" height="100" width="100"></a>
-				<h4 class="text-center"><strong> Cheats Sheets</strong></h4>
-				<p>It is a more general use, in that makes a brief reference to the most used terms, commands or symbols</p>
-            </div>
-        </div>
-    </div>
-</div>
+	    <div class="col-md-4 mx-auto">
+	        <div class="card">
+	            <div class="card-body text-center">
+					<img src="/static/cheat.png" class="img-fluid" height="100" width="100"></a>
+					<h4 class="text-center"><strong> Cheats Sheets</strong></h4>
+					<p>It is a more general use, in that makes a brief reference to the most used terms, commands or symbols</p>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 
+{% endblock %}
+
+{% block footer %}
+	<footer>
+		<div class="container-fluid bg-primary text-light py-2 footer-container">
+			<div class="row">
+				<div class="col-md accordion-body">
+					<span>©2023 - Open Source (Project Portfolio).</span>
+				</div>
+				<div class="col-md-6 text-right">
+					<a class="text-light mx-3" href="/cookies_policy">Cookies Policy</a>
+					<a class="text-light mx-3" href="/contact">Contact</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<style>
+		
+		.footer-container {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 200px;
+}
+	</style>
 {% endblock %}
