@@ -130,18 +130,24 @@ def delete_books(request, id):
         # The book doesn't exist, display an error message and redirect
         messages.error(request, 'Error: The book does not exist')
         return redirect('books')
-     # The user is authorized to delete the book
-    if book.user == request.user:
-        book.delete()
-        messages.success(
-            request, 'The book has been successfully removed!', extra_tags='success')
-    else:
-        # The user is not authorizedn error message
+    
+    # The user is authorized to delete the book
+    if book.user != request.user:
         messages.error(
             request, 'You do not have permission to delete this book', extra_tags='danger')
+        return redirect('books')
 
+    # Get the favorite objects associated with the book
+    favorites = book.favorites.all()
+    favorites.delete()
+    
+    # Delete the book object
+    book.delete()
+    
+    # Display success message and redirect the book list page
+    messages.success(
+        request, 'The book has been successfully removed!', extra_tags='success')
     return redirect('books')
-
 
 @login_required # Route Protection
 def search_books(request):
