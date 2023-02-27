@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config()}
+DATABASES = {"default": dj_database_url.config(default='postgres://devresources_user:F3xbKmGUkdWUUg9Zk25IzSRDy55NGjdW@dpg-cfub84qrrk0c831jhmd0-a/devresources', conn_max_age=600)}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
