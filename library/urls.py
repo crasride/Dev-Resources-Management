@@ -4,7 +4,13 @@ from library import views
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
 
-
+'''
+   This code defines the URLs of the web application in Django, which are 
+    accessible through the browser's address bar. Each URL is associated with a 
+    view, which is a Python function that processes the request and returns a 
+    response. In addition, paths are defined for the static and media files that
+    are used in the application.
+'''
 
 urlpatterns = [
     path('', views.home, name='home'),
