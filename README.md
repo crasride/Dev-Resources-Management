@@ -1,5 +1,5 @@
-<p align="center"> <img width="150" height="150" src="./docs/images/logo.png" </p>
-<h1 align="center">DEV RESOURCES MANAGEMENT</h1>
+<p align="center"> <img width="" height="" src="./docs/images/panel.png" </p>
+
 
 
 
@@ -23,7 +23,7 @@ This web application creates an online catalog for a small local library, where 
 
 These are the `Links` available about my project:
 * [The deployed site](https://dev-resources-management.onrender.com/)
-* [The blog post]()
+* [The blog post](https://medium.com/@4990/my-project-provides-programmers-a-document-management-solution-to-store-resources-about-programming-eed9d7a4b058)
 * [The Author](https://www.linkedin.com/in/jd-fernandez)
 
 <br></br>
