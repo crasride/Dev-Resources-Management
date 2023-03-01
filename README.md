@@ -42,7 +42,7 @@ These are the `Links` available about my project:
 crasride@ubuntu:~/$ git clone https://github.com/crasride/Dev-Resources-Management.git
 ```
 
-3) Assuming you have your Python setup, run the following commands (if you're on Windows, you can use py or py -3 instead of python to start Python):
+3) Assuming you have your Python setup, run the following commands (if you're on Windows, you can use py or py-3 instead of python to start Python):
 
 ```
 crasride@ubuntu:~/$ pip3 install -r requirements.txt
